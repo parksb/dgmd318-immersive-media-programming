@@ -5,7 +5,9 @@ using UnityEngine;
 public class walkingStateController : MonoBehaviour
 {
     Animator animator;
+ 
     int isWalkingHash;
+    int isWalkingBackHash;
     int isRunningHash;
     int isJumpingHash;
   
@@ -14,6 +16,7 @@ public class walkingStateController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         isWalkingHash = Animator.StringToHash("isWalking");
+        isWalkingBackHash = Animator.StringToHash("isWalkingBack");
         isRunningHash = Animator.StringToHash("isRunning");
         isJumpingHash = Animator.StringToHash("isJumping");
     }
@@ -23,6 +26,7 @@ public class walkingStateController : MonoBehaviour
     {
         bool isWalking = animator.GetBool(isWalkingHash);
         bool forwardPressed = Input.GetKey("w");
+        float velo = 1.5f;
        
         if (!isWalking && forwardPressed) {
             animator.SetBool(isWalkingHash, true);
@@ -30,8 +34,22 @@ public class walkingStateController : MonoBehaviour
         
         if (isWalking && !forwardPressed) {
             animator.SetBool(isWalkingHash, false);
-        }       
+        }
         
+        bool isWalkingBack = animator.GetBool(isWalkingBackHash);
+        bool backwardPressed = Input.GetKey("s");
+
+        if (!isWalkingBack && backwardPressed) {
+            animator.SetBool(isWalkingBackHash, true);
+        }
+        
+        if (isWalkingBack) {
+            velo = -1.2f;
+            if (!backwardPressed) {
+                animator.SetBool(isWalkingBackHash, false);
+            }
+        }
+          
         bool isRunning = animator.GetBool(isRunningHash);
         bool runPressed = Input.GetKey("left shift");
         
@@ -39,8 +57,11 @@ public class walkingStateController : MonoBehaviour
             animator.SetBool(isRunningHash, true);
         }
         
-        if (isRunning && (!forwardPressed || !runPressed)) {
-            animator.SetBool(isRunningHash, false);
+        if (isRunning) {
+            velo = 3.1f;
+            if (!forwardPressed || !runPressed) {
+                animator.SetBool(isRunningHash, false);
+            }
         }
         
         bool isJumping = animator.GetBool(isJumpingHash);
@@ -52,6 +73,10 @@ public class walkingStateController : MonoBehaviour
         
         if (isJumping && !jumpPressed) {
             animator.SetBool(isJumpingHash, false);
+        }
+        
+        if (isWalking || isRunning || isWalkingBack) {
+            transform.Translate(new Vector3(0, 0, velo * Time.deltaTime));
         }
     }
 }
