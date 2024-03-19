@@ -27,6 +27,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (health < 1)
+        {
+            Debug.Log("Game Over!");
+            UnityEditor.EditorApplication.isPlaying = false;
+        }
+
         float moveH = Input.GetAxis("Horizontal");
         float moveV = Input.GetAxis("Vertical");
         direction = new Vector3(moveH, 0.0f, moveV);
@@ -50,6 +56,24 @@ public class PlayerController : MonoBehaviour
     {
         rb.AddForce(direction * force);
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            health -= 10;
+            Debug.Log("Collided with an enemy. Health is now: " + health);
+        }
+    }
+    
+    void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            health -= 1;
+            Debug.Log("Collided with an enemy. Health is now: " + health);
+        }
+    }
     
     private void OnTriggerEnter(Collider other)
     {
@@ -68,7 +92,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (other.CompareTag("NotFood"))
         {
-            health -= 10;
+            health -= 5;
             audioSource.PlayOneShot(failSound);
             Debug.Log("Player takes damage. Health is now: " + health);
         }
