@@ -16,7 +16,6 @@ public class objectSpawnerScript : MonoBehaviour
     {
         if (Input.GetKeyDown("c"))
         {
-            Debug.Log("C key was pressed.");
             float x = Random.Range(-4.0f, 4.0f);
             float y = Random.Range(0.0f, 3.0f);
             float z = Random.Range(-4.0f, 4.0f);
