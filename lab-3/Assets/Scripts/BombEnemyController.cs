@@ -5,9 +5,10 @@ using UnityEngine;
 public class BombEnemyController : MonoBehaviour
 {
     public AudioSource sound;
+    private GameObject player;
 
     public float radius = 5.0f;
-    public float power = 100.0f;
+    public float power = 200.0f;
     public float lift = 30;
 
     private bool isExploded = false;
@@ -15,7 +16,7 @@ public class BombEnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
@@ -34,6 +35,7 @@ public class BombEnemyController : MonoBehaviour
             }
 
             Destroy(gameObject);
+            player.SendMessage("earnPoints", 2);
         }
     }
     

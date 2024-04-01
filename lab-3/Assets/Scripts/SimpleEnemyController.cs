@@ -5,11 +5,13 @@ using UnityEngine;
 public class SimpleEnemyController : MonoBehaviour
 {
     public AudioSource sound;
+    private GameObject player;
+    
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
@@ -22,5 +24,6 @@ public class SimpleEnemyController : MonoBehaviour
     {
         sound.Play();
         Destroy(gameObject);
+        player.SendMessage("earnPoints", 1);
     }
 }

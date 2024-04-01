@@ -13,12 +13,12 @@ public class Shoot : MonoBehaviour
     private bool mousePressed;
     private Vector3 mousePosition;
 
-    private int ammo = 30;
+    private int ammo = 40;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log("Initial ammo: " + ammo);
     }
 
     // Update is called once per frame
@@ -44,7 +44,7 @@ public class Shoot : MonoBehaviour
             {
                 ammo -= 1;
                 sound.Play();
-                Debug.Log("Ammo: " + ammo);
+                Debug.Log("Bang! Remaining ammo: " + ammo);
 
                 if (Physics.Raycast(ray, out hit, range, shootableMask))
                 {

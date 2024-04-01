@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 velocity;
     private bool isGrounded;
+    private int points = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -41,5 +42,11 @@ public class PlayerController : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+    
+    public void earnPoints(int value)
+    {
+        points += value;
+        Debug.Log("Player earned points. Now points: " + points);
     }
 }
