@@ -5,68 +5,75 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
+[System.Serializable]
+public struct PlaceablePrefabs
+{
+    public string name;
+    public GameObject prefab;
+}
+
 public class ARImageObjectSpawner : MonoBehaviour
 {
     private ARTrackedImageManager imageManager;
-
-    [SerializeField]
-    private GameObject prefab;
-
-    private GameObject spawned;
+    public PlaceablePrefabs[] prefabs;
+    private Dictionary<string, GameObject> spawnedPrefabs = new Dictionary<string, GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
         imageManager = GetComponent<ARTrackedImageManager>();
+        
+        foreach (PlaceablePrefabs prefab in prefabs)
+        {
+            GameObject newPrefab = Instantiate(prefab.prefab, Vector3.zero, Quaternion.identity);
+            newPrefab.name = prefab.name;
+            newPrefab.SetActive(false);
+            spawnedPrefabs.Add(prefab.name, newPrefab);
+        }
     }
 
     private void OnEnable()
     {
-        imageManager.trackedImagesChanged += OnImagesChanged;
+        imageManager.trackedImagesChanged += OnImageChanged;
     }
     
     private void OnDisable()
     {
-        imageManager.trackedImagesChanged -= OnImagesChanged;
+        imageManager.trackedImagesChanged -= OnImageChanged;
     }
 
     private void OnImageChanged(ARTrackedImagesChangedEventArgs args)
     {
         foreach (ARTrackedImage image in args.added)
         {
-            if (image.referenceImage.name == "earth" && spawned == null)
-            {
-                spawned = Instantiate(prefab, image.transform.position, image.transform.rotation);
-            }
+            UpdateSpawned(image);
         }
-        
-         foreach (ARTrackedImage image in args.updated)
-         {
-             UpdateSpawned(image);
-         }
+
+        foreach (ARTrackedImage image in args.updated)
+        {
+            UpdateSpawned(image);
+        }
          
-          foreach (ARTrackedImage image in args.removed)
-          {
-              spawned.setActive(false);
-          }
+        foreach (ARTrackedImage image in args.removed)
+        {
+            spawnedPrefabs[image.referenceImage.name].SetActive(false);
+        }
     }
 
     private void UpdateSpawned(ARTrackedImage image)
     {
-        if (spawned == null)
+        string name = image.referenceImage.name;
+        GameObject spawned = spawnedPrefabs[name];
+
+        if (image.trackingState == TrackingState.Tracking)
         {
-            return;
-        }
-        
-        if (image.trackingState == TrackingState.Tracking && image.referenceImage.name == "earth")
-        {
-            spawned.setActive(true);
             spawned.transform.position = image.transform.position;
             spawned.transform.rotation = image.transform.rotation;
+            spawned.SetActive(true);
         }
-        else if (image.trackingState == TrackingState.Limited || image.trackingState == TrackingState.None)
+        else
         {
-            spawned.setActive(false);
+            spawned.SetActive(false);
         }
     }
 }
