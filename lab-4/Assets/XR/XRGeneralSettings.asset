@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8752479014044907874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d236b7d11115f2143951f1e14045df39, type: 3}
+  m_Name: WebGL Settings
+  m_EditorClassIdentifier: 
+  m_LoaderManagerInstance: {fileID: 5460869411760006965}
+  m_InitManagerOnStart: 1
 --- !u!114 &-8133518806003919769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51,8 +65,8 @@ MonoBehaviour:
   - {fileID: 6796949849618337366}
   - {fileID: 7409956309476867576}
   - {fileID: 8792172334962700932}
-  - {fileID: 8558120427057064884}
---- !u!114 &1609312260940511174
+  - {fileID: -8752479014044907874}
+--- !u!114 &5460869411760006965
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,20 +110,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LoaderManagerInstance: {fileID: -8133518806003919769}
   m_InitManagerOnStart: 1
---- !u!114 &8558120427057064884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d236b7d11115f2143951f1e14045df39, type: 3}
-  m_Name: WebGL Settings
-  m_EditorClassIdentifier: 
-  m_LoaderManagerInstance: {fileID: 1609312260940511174}
-  m_InitManagerOnStart: 1
 --- !u!114 &8792172334962700932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,5 +140,5 @@ MonoBehaviour:
   m_AutomaticLoading: 0
   m_AutomaticRunning: 0
   m_Loaders:
-  - {fileID: 11400000, guid: 24207b85ca4574fb9b6890bbcc5ce635, type: 2}
+  - {fileID: 11400000, guid: e8b36b9b724e7f169916c7bd49b064e6, type: 2}
   - {fileID: 11400000, guid: b92644a1b70d34c08aaf6c1b37c9675d, type: 2}
