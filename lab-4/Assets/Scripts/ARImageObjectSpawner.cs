@@ -10,16 +10,24 @@ public struct PlaceablePrefabs
 {
     public string name;
     public GameObject prefab;
+    public float rotation;
+}
+
+public struct SpawnedPrefab
+{
+    public GameObject gameObject;
+
+    public float rotation;
 }
 
 public class ARImageObjectSpawner : MonoBehaviour
 {
     private ARTrackedImageManager imageManager;
     public PlaceablePrefabs[] prefabs;
-    private Dictionary<string, GameObject> spawnedPrefabs = new Dictionary<string, GameObject>();
+    private Dictionary<string, SpawnedPrefab> spawnedPrefabs = new Dictionary<string, SpawnedPrefab>();
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         imageManager = GetComponent<ARTrackedImageManager>();
         
@@ -28,7 +36,11 @@ public class ARImageObjectSpawner : MonoBehaviour
             GameObject newPrefab = Instantiate(prefab.prefab, Vector3.zero, Quaternion.identity);
             newPrefab.name = prefab.name;
             newPrefab.SetActive(false);
-            spawnedPrefabs.Add(prefab.name, newPrefab);
+
+            SpawnedPrefab spawnedPrefab;
+            spawnedPrefab.gameObject = newPrefab;
+            spawnedPrefab.rotation = prefab.rotation;
+            spawnedPrefabs.Add(newPrefab.name, spawnedPrefab);
         }
     }
 
@@ -56,24 +68,24 @@ public class ARImageObjectSpawner : MonoBehaviour
          
         foreach (ARTrackedImage image in args.removed)
         {
-            spawnedPrefabs[image.referenceImage.name].SetActive(false);
+            spawnedPrefabs[image.referenceImage.name].gameObject.SetActive(false);
         }
     }
 
     private void UpdateSpawned(ARTrackedImage image)
     {
         string name = image.referenceImage.name;
-        GameObject spawned = spawnedPrefabs[name];
+        SpawnedPrefab spawned = spawnedPrefabs[name];
 
         if (image.trackingState == TrackingState.Tracking)
         {
-            spawned.transform.position = image.transform.position;
-            spawned.transform.rotation = image.transform.rotation;
-            spawned.SetActive(true);
+            spawned.gameObject.transform.position = image.transform.position;
+            spawned.gameObject.transform.Rotate(Vector3.up, spawned.rotation);
+            spawned.gameObject.SetActive(true);
         }
         else
         {
-            spawned.SetActive(false);
+            spawned.gameObject.SetActive(false);
         }
     }
 }

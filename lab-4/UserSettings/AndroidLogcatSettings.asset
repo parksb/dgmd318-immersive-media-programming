@@ -1,17 +1,47 @@
 {
     "m_SelectedDeviceId": "26171FDF6006LV",
     "m_SelectedProcess": {
-        "deviceId": "26171FDF6006LV",
-        "name": "com.unity.template.ar_mobile",
-        "processId": 14412,
+        "deviceId": "",
+        "name": "",
+        "processId": 0,
         "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownProcessesForSerialization": [
         {
             "deviceId": "26171FDF6006LV",
-            "name": "com.unity.template.ar_mobile",
-            "processId": 14412,
+            "name": "com.android.launcher3",
+            "processId": 2357,
+            "exited": false
+        },
+        {
+            "deviceId": "26171FDF6006LV",
+            "name": "com.unity.template.ar_mobileARCompanion",
+            "processId": 8116,
+            "exited": true
+        },
+        {
+            "deviceId": "26171FDF6006LV",
+            "name": "com.unity.template.ar_mobileARCompanion",
+            "processId": 8810,
+            "exited": true
+        },
+        {
+            "deviceId": "26171FDF6006LV",
+            "name": "com.unity.template.ar_mobileARCompanion",
+            "processId": 11046,
+            "exited": true
+        },
+        {
+            "deviceId": "26171FDF6006LV",
+            "name": "com.unity.template.ar_mobileARCompanion",
+            "processId": 12553,
+            "exited": true
+        },
+        {
+            "deviceId": "26171FDF6006LV",
+            "name": "com.unity.template.ar_mobileARCompanion",
+            "processId": 13091,
             "exited": false
         }
     ],
@@ -71,7 +101,7 @@
     "m_FilterOptions": {
         "m_Filter": "",
         "m_UseRegularExpressions": false,
-        "m_MatchCase": false
+        "m_MatchCase": true
     },
     "m_SymbolPaths": [],
     "m_CaptureVideoSettings": {

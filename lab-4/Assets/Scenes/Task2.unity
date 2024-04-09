@@ -476,9 +476,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - name: earth
-    prefab: {fileID: 100000, guid: 1d1efd74961b744cca932e0880b5eb4d, type: 3}
+    prefab: {fileID: 1733945558841920, guid: 300f80108a63f48618cb4a1c8b8c1e86, type: 3}
+    rotation: 0.5
   - name: venus
     prefab: {fileID: 1647581975099426, guid: 835acc1a9ebe24c0fa3854c99346f9cd, type: 3}
+    rotation: 2
 --- !u!1 &1749384872
 GameObject:
   m_ObjectHideFlags: 0
