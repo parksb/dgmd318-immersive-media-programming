@@ -17,7 +17,6 @@ public struct SpawnedPrefab
 {
     public GameObject gameObject;
 
-    public float rotation;
 }
 
 public class ARImageObjectSpawner : MonoBehaviour
@@ -39,7 +38,6 @@ public class ARImageObjectSpawner : MonoBehaviour
 
             SpawnedPrefab spawnedPrefab;
             spawnedPrefab.gameObject = newPrefab;
-            spawnedPrefab.rotation = prefab.rotation;
             spawnedPrefabs.Add(newPrefab.name, spawnedPrefab);
         }
     }

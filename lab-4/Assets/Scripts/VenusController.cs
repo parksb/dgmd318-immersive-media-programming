@@ -6,7 +6,7 @@ public class VenusController : MonoBehaviour
 {
     private AudioSource audioSource;
     
-    private float rotatingSpeed = 15.0f;
+    private float rotatingSpeed = 1.0f;
      
     // Start is called before the first frame update
     void Start()
@@ -26,12 +26,13 @@ public class VenusController : MonoBehaviour
         {
             audioSource.Play();
             rotatingSpeed += 10.0f;
-            Debug.Log("Venus rotating speed: " + rotatingSpeed);
         }
-        else if (touchCount == 2 && rotatingSpeed >= 10.0f)
+        else if (touchCount == 2 && rotatingSpeed >= 11.0f)
         {
+            audioSource.Play();
             rotatingSpeed -= 10.0f;
-            Debug.Log("Venus rotating speed: " + rotatingSpeed);
         }
+
+        Debug.Log("Venus rotating speed: " + rotatingSpeed);
     }
 }

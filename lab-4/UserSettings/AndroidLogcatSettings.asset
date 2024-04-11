@@ -17,26 +17,32 @@
         {
             "deviceId": "26171FDF6006LV",
             "name": "com.unity.template.ar_mobileARCompanion",
-            "processId": 27013,
+            "processId": 5951,
+            "exited": true
+        },
+        {
+            "deviceId": "26171FDF6006LV",
+            "name": "com.unity.template.ar_mobileARCompanion",
+            "processId": 6628,
             "exited": true
         },
         {
             "deviceId": "26171FDF6006LV",
             "name": "com.unity.template.ar_mobile",
-            "processId": 29710,
+            "processId": 7143,
+            "exited": true
+        },
+        {
+            "deviceId": "26171FDF6006LV",
+            "name": "com.unity.template.ar_mobile",
+            "processId": 7657,
             "exited": true
         },
         {
             "deviceId": "26171FDF6006LV",
             "name": "com.unity.template.ar_mobileARCompanion",
-            "processId": 30502,
-            "exited": true
-        },
-        {
-            "deviceId": "26171FDF6006LV",
-            "name": "com.unity.template.ar_mobileARCompanion",
-            "processId": 31175,
-            "exited": true
+            "processId": 8089,
+            "exited": false
         }
     ],
     "m_Tags": {
