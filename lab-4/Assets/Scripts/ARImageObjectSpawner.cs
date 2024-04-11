@@ -80,7 +80,6 @@ public class ARImageObjectSpawner : MonoBehaviour
         if (image.trackingState == TrackingState.Tracking)
         {
             spawned.gameObject.transform.position = image.transform.position;
-            spawned.gameObject.transform.Rotate(Vector3.up, spawned.rotation);
             spawned.gameObject.SetActive(true);
         }
         else

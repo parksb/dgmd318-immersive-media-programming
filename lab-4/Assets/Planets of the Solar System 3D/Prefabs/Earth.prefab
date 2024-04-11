@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4947585001355798}
   - component: {fileID: 33598354769644610}
   - component: {fileID: 23090388759196626}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Earth_Lod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4517316721654034}
   - component: {fileID: 198289972671360370}
   - component: {fileID: 199987257424377576}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4936,7 +4936,8 @@ GameObject:
   - component: {fileID: 4643521465287934}
   - component: {fileID: 205568318585521926}
   - component: {fileID: 4878998461253096602}
-  m_Layer: 0
+  - component: {fileID: 7590195684286952039}
+  m_Layer: 6
   m_Name: Earth
   m_TagString: TrackingObject
   m_Icon: {fileID: 0}
@@ -5007,6 +5008,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7590195684286952039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733945558841920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6e62c205ab657d6b99ffd6be292ccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1982611864615202
 GameObject:
   m_ObjectHideFlags: 0
@@ -5018,7 +5031,7 @@ GameObject:
   - component: {fileID: 4921127262728976}
   - component: {fileID: 33504760901362302}
   - component: {fileID: 23867915394586346}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Earth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
