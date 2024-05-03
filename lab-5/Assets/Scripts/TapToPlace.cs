@@ -39,13 +39,13 @@ public class TapToPlace : MonoBehaviour
         if (raycastManager.Raycast(ray, hitResults, TrackableType.PlaneWithinPolygon))
         {
             Pose hitPose = hitResults[0].pose;
-            int count = Random.Range(1, 3);
+            int count = Random.Range(1, 4);
             for (int i = 0; i < count; i++)
             {
-                GameObject prefab = prefabs[Random.Range(0, prefabs.Count - 1)];
-                Vector3 direction = new Vector3(Random.Range(-0.2f, 0.2f), 0, Random.Range(-0.2f, 0.2f));
+                GameObject prefab = prefabs[Random.Range(0, prefabs.Count)];
+                Vector3 direction = new Vector3(Random.Range(-0.2f, 0.2f), 0.1f, Random.Range(-0.2f, 0.2f));
                 GameObject obj = Instantiate(prefab, hitPose.position + direction, hitPose.rotation);
-                spawnedObjects.Add(obj); 
+                // spawnedObjects.Add(obj);
             }
         }
     }
