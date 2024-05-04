@@ -324,8 +324,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -240, y: 597}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -140, y: 597}
+  m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &399440724
 MonoBehaviour:
@@ -506,7 +506,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 475959562}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1517549305}
+        m_TargetAssemblyTypeName: TapToPlace, Assembly-CSharp
+        m_MethodName: ChangeMode
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Ranged attack
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &475959562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -602,7 +614,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1223439836}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -793,7 +805,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1378783780}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1517549305}
+        m_TargetAssemblyTypeName: TapToPlace, Assembly-CSharp
+        m_MethodName: ChangeMode
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Mass attack
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1378783780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -981,6 +1005,7 @@ GameObject:
   - component: {fileID: 1517549305}
   - component: {fileID: 1517549304}
   - component: {fileID: 1517549306}
+  - component: {fileID: 1517549307}
   m_Layer: 0
   m_Name: XR Origin (XR Rig)
   m_TagString: Untagged
@@ -1080,7 +1105,6 @@ MonoBehaviour:
   - {fileID: 2859545042255651740, guid: b1c3fb77144fe7b4392bf280269dd0b1, type: 3}
   - {fileID: 1256341643840187853, guid: 16d9ba58f25c23c448199779b1416834, type: 3}
   sound: {fileID: 1517549306}
-  objectAliveText: {fileID: 1223439838}
 --- !u!82 &1517549306
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1177,6 +1201,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1517549307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517549299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 372240bd12c532f40997aaa3def37e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectAliveText: {fileID: 1223439838}
+  modeText: {fileID: 399440724}
 --- !u!1 &1671532531
 GameObject:
   m_ObjectHideFlags: 0
@@ -1674,7 +1712,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1922917831}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1517549305}
+        m_TargetAssemblyTypeName: TapToPlace, Assembly-CSharp
+        m_MethodName: ChangeMode
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Add
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1922917831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2081,10 +2131,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1223439837}
   - {fileID: 1922917829}
   - {fileID: 475959560}
   - {fileID: 1378783778}
-  - {fileID: 1223439837}
   - {fileID: 399440723}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

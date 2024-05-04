@@ -4,7 +4,7 @@ using UnityEngine;
 
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
-using TMPro;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(ARRaycastManager))]
 public class TapToPlace : MonoBehaviour
@@ -12,17 +12,18 @@ public class TapToPlace : MonoBehaviour
     public List<GameObject> prefabs;
     public AudioSource sound;
 
-    public TMP_Text objectAliveText;
-
+    private UpdateLabels labelController;
     private ARRaycastManager raycastManager;
     private List<GameObject> spawnedObjects = new List<GameObject>();
-
     private List<ARRaycastHit> hitResults = new List<ARRaycastHit>();
+
+    private string mode = "Add";
 
     // Start is called before the first frame update
     void Awake()
     {
         raycastManager = GetComponent<ARRaycastManager>();
+        labelController = GetComponent<UpdateLabels>();
     }
 
     // Update is called once per frame
@@ -30,9 +31,13 @@ public class TapToPlace : MonoBehaviour
     {
         if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            create(Input.mousePosition);
-            sound.Play();
-            objectAliveText.text = "Objects alive: " + spawnedObjects.Count;
+            Vector3 mousePosition = Input.mousePosition;
+            if (!IsOverUI(mousePosition) && mode == "Add")
+            {
+                create(mousePosition);
+                sound.Play();
+                labelController.UpdateObjectAliveLabel(spawnedObjects.Count);
+            }
         }
     }
 
@@ -52,5 +57,22 @@ public class TapToPlace : MonoBehaviour
                 spawnedObjects.Add(obj);
             }
         }
+    }
+
+    bool IsOverUI(Vector3 position)
+    {
+        PointerEventData eventPosition = new PointerEventData(EventSystem.current);
+        eventPosition.position = new Vector2(position.x, position.y);
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventPosition, results);
+
+        return results.Count > 0;
+    }
+
+    public void ChangeMode(string value)
+    {
+        mode = value;
+        labelController.UpdateModeLabel(value);
     }
 }
