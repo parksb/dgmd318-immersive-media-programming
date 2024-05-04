@@ -10,12 +10,17 @@ using UnityEngine.EventSystems;
 public class TapToPlace : MonoBehaviour
 {
     public List<GameObject> prefabs;
+    public Material waterMaterial;
+    public Material defaultMaterial;
+
     public AudioSource addSound;
     public AudioSource rangedAttackSound;
+    public AudioSource massAttackSound;
     public AudioSource destroyedSound;
 
     private UpdateLabels labelController;
     private ARRaycastManager raycastManager;
+    private ARPlaneManager arPlaneManager;
     private List<GameObject> spawnedObjects = new List<GameObject>();
 
     private string mode = "Add";
@@ -26,6 +31,7 @@ public class TapToPlace : MonoBehaviour
     {
         raycastManager = GetComponent<ARRaycastManager>();
         labelController = GetComponent<UpdateLabels>();
+        arPlaneManager = GetComponent<ARPlaneManager>();
     }
 
     // Update is called once per frame
@@ -40,17 +46,22 @@ public class TapToPlace : MonoBehaviour
                 Ray ray = Camera.main.ScreenPointToRay(mousePosition);
                 if (raycastManager.Raycast(ray, hitResults, TrackableType.PlaneWithinPolygon))
                 {
-                    Pose hitPose = hitResults[0].pose;
+                    ARRaycastHit hit = hitResults[0];
                     if (mode == "Add")
                     {
-                        Add(mousePosition, hitPose);
+                        Add(mousePosition, hit.pose);
                         addSound.Play();
                         labelController.UpdateObjectsAliveLabel(spawnedObjects.Count);
                     }
                     else if (mode == "Ranged attack")
                     {
-                        RangedAttack(mousePosition, hitPose);
+                        RangedAttack(mousePosition, hit.pose);
                         rangedAttackSound.Play();
+                    }
+                    else
+                    {
+                        MassAttack(mousePosition, hit);
+                        massAttackSound.Play();
                     }
                 }
             }
@@ -83,6 +94,11 @@ public class TapToPlace : MonoBehaviour
         }
     }
 
+    void MassAttack(Vector3 mousePosition, ARRaycastHit hit)
+    {
+       StartCoroutine(ChangePlaneMaterial(hit));
+    }
+
     bool IsOverUI(Vector3 position)
     {
         PointerEventData eventPosition = new PointerEventData(EventSystem.current);
@@ -92,6 +108,17 @@ public class TapToPlace : MonoBehaviour
         EventSystem.current.RaycastAll(eventPosition, results);
 
         return results.Count > 0;
+    }
+
+    IEnumerator ChangePlaneMaterial(ARRaycastHit hit) {
+        ARPlane plane = arPlaneManager.GetPlane(hit.trackableId);
+        Renderer renderer = plane.GetComponent<Renderer>();
+
+        renderer.material = waterMaterial;
+        plane.GetComponent<PlaneController>().Toggle();
+        yield return new WaitForSeconds(1);
+        plane.GetComponent<PlaneController>().Toggle();
+        renderer.material = defaultMaterial;
     }
 
     public void ChangeMode(string value)
