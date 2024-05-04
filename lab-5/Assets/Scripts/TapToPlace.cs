@@ -10,14 +10,16 @@ using UnityEngine.EventSystems;
 public class TapToPlace : MonoBehaviour
 {
     public List<GameObject> prefabs;
-    public AudioSource sound;
+    public AudioSource addSound;
+    public AudioSource rangedAttackSound;
+    public AudioSource destroyedSound;
 
     private UpdateLabels labelController;
     private ARRaycastManager raycastManager;
     private List<GameObject> spawnedObjects = new List<GameObject>();
-    private List<ARRaycastHit> hitResults = new List<ARRaycastHit>();
 
     private string mode = "Add";
+    private int objectsDestroyed = 0;
 
     // Start is called before the first frame update
     void Awake()
@@ -32,29 +34,51 @@ public class TapToPlace : MonoBehaviour
         if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             Vector3 mousePosition = Input.mousePosition;
-            if (!IsOverUI(mousePosition) && mode == "Add")
+            if (!IsOverUI(mousePosition))
             {
-                create(mousePosition);
-                sound.Play();
-                labelController.UpdateObjectAliveLabel(spawnedObjects.Count);
+                List<ARRaycastHit> hitResults = new List<ARRaycastHit>();
+                Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+                if (raycastManager.Raycast(ray, hitResults, TrackableType.PlaneWithinPolygon))
+                {
+                    Pose hitPose = hitResults[0].pose;
+                    if (mode == "Add")
+                    {
+                        Add(mousePosition, hitPose);
+                        addSound.Play();
+                        labelController.UpdateObjectsAliveLabel(spawnedObjects.Count);
+                    }
+                    else if (mode == "Ranged attack")
+                    {
+                        RangedAttack(mousePosition, hitPose);
+                        rangedAttackSound.Play();
+                    }
+                }
             }
         }
     }
 
-    void create(Vector3 mousePosition)
+    void Add(Vector3 mousePosition, Pose hitPose)
     {
-        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-
-        if (raycastManager.Raycast(ray, hitResults, TrackableType.PlaneWithinPolygon))
+        int count = Random.Range(1, 4);
+        for (int i = 0; i < count; i++)
         {
-            Pose hitPose = hitResults[0].pose;
-            int count = Random.Range(1, 4);
-            for (int i = 0; i < count; i++)
+            GameObject prefab = prefabs[Random.Range(0, prefabs.Count)];
+            Vector3 direction = new Vector3(Random.Range(-0.2f, 0.2f), 0.5f, Random.Range(-0.2f, 0.2f));
+            GameObject obj = Instantiate(prefab, hitPose.position + direction, hitPose.rotation);
+            spawnedObjects.Add(obj);
+        }
+    }
+
+    void RangedAttack(Vector3 mousePosition, Pose hitPose)
+    {
+        Vector3 hitPosition = hitPose.position;
+        Collider[] colliders = Physics.OverlapSphere(hitPosition, 0.3f);
+        foreach (Collider hit in colliders)
+        {
+            Rigidbody rb = hit.GetComponent<Rigidbody>();
+            if (rb != null)
             {
-                GameObject prefab = prefabs[Random.Range(0, prefabs.Count)];
-                Vector3 direction = new Vector3(Random.Range(-0.2f, 0.2f), 0.1f, Random.Range(-0.2f, 0.2f));
-                GameObject obj = Instantiate(prefab, hitPose.position + direction, hitPose.rotation);
-                spawnedObjects.Add(obj);
+                rb.AddExplosionForce(80.0f, hitPosition, 0.3f, 50);
             }
         }
     }
@@ -74,5 +98,18 @@ public class TapToPlace : MonoBehaviour
     {
         mode = value;
         labelController.UpdateModeLabel(value);
+    }
+
+    public void DestoryObject(GameObject obj)
+    {
+        int lived = spawnedObjects.Count;
+
+        Destroy(obj);
+        destroyedSound.Play();
+        spawnedObjects.RemoveAll(x => obj.GetInstanceID() == x.GetInstanceID());
+        labelController.UpdateObjectsAliveLabel(spawnedObjects.Count);
+
+        objectsDestroyed += lived - spawnedObjects.Count;
+        labelController.UpdateObjectsDestroyedLabel(objectsDestroyed);
     }
 }

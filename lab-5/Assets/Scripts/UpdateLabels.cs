@@ -5,16 +5,22 @@ using TMPro;
 
 public class UpdateLabels : MonoBehaviour
 {
-    public TMP_Text objectAliveText;
+    public TMP_Text objectsAliveText;
+    public TMP_Text objectsDestroyedText;
     public TMP_Text modeText;
 
-    public void UpdateObjectAliveLabel(int count)
+    public void UpdateObjectsAliveLabel(int count)
     {
-        objectAliveText.text = "Objects alive: " + count;
+        objectsAliveText.text = "Objects alive: " + count;
     }
 
     public void UpdateModeLabel(string mode)
     {
         modeText.text = "Mode: " + mode;
+    }
+
+    public void UpdateObjectsDestroyedLabel(int count)
+    {
+        objectsDestroyedText.text = "Objects destroyed: " + count;
     }
 }

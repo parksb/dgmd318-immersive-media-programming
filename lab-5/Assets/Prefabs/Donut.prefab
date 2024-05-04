@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1292258806563822841}
   - component: {fileID: 447728024855010272}
   - component: {fileID: 5241868939119956859}
+  - component: {fileID: 8051931034201472937}
   m_Layer: 0
   m_Name: Donut
   m_TagString: Untagged
@@ -133,3 +134,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &8051931034201472937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2859545042255651740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28ef5e76406c6b44d861927e652c7254, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 0}
