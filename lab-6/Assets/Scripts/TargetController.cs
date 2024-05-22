@@ -26,8 +26,9 @@ public class TargetController : MonoBehaviour
         if (other.gameObject.tag == "Bullet")
         {
             audio.Play();
+            GetComponent<Renderer>().enabled = false;
             player.GetComponent<ShootGameController>().IncrScore();
-            Destroy(gameObject);
+            Destroy(gameObject, 2);
         }
     }
 }

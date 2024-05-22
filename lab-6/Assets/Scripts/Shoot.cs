@@ -29,7 +29,7 @@ public class Shoot : MonoBehaviour
         {
             GameObject obj = Instantiate(bullet, muzzle.position, muzzle.rotation);
             obj.GetComponent<Rigidbody>().AddForce(force * muzzle.forward, ForceMode.Impulse);
-            audio.Play();
+            audio.PlayOneShot(audio.clip);
             Destroy(obj, 2);
             shoot = false;
         }
