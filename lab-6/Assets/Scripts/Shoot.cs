@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
+    public bool isSuperPistol = false;
+
     [SerializeField]
     private float force = 10;
 
@@ -28,6 +30,10 @@ public class Shoot : MonoBehaviour
         if (shoot)
         {
             GameObject obj = Instantiate(bullet, muzzle.position, muzzle.rotation);
+            if (this.isSuperPistol)
+            {
+                obj.tag = "SuperBullet";
+            }
             obj.GetComponent<Rigidbody>().AddForce(force * muzzle.forward, ForceMode.Impulse);
             audio.PlayOneShot(audio.clip);
             Destroy(obj, 2);

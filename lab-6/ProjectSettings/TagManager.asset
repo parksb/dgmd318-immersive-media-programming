@@ -11,6 +11,7 @@ TagManager:
   - RedBall
   - YellowBall
   - Bullet
+  - SuperBullet
   layers:
   - Default
   - TransparentFX
