@@ -511,7 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f135605684ba346b02d908c262406f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isScoreMode: 0
+  isScoreMode: 1
   totalTargets: 10
 --- !u!1 &189048144
 GameObject:
