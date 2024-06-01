@@ -4,14 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - BlueBox
-  - RedBox
-  - YellowBox
-  - BlueBall
-  - RedBall
-  - YellowBall
-  - Bullet
-  - SuperBullet
+  - Weapon
   layers:
   - Default
   - TransparentFX
